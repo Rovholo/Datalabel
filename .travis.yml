@@ -16,6 +16,5 @@ matrix:
       - mysql -u root -e "GRANT ALL ON d1312548.* TO 's1312548'@'localhost';"
     - language: javascript
       javascript:
-        -
-
-      
+        -ES5
+        -ES6
