@@ -8,9 +8,4 @@ matrix:
           - '7.0'
         services:
           -mysql
-        before_script:
-            - travis_retry composer self-update
-            - composer install
-        #command to run the test
         
-        after_success: coveralls
