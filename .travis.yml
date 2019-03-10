@@ -7,6 +7,10 @@ include:
           - '7.0'
         services:
           -mysql
+<<<<<<< HEAD
         #command to run the test
         script:
           - echo "Hello World"
+=======
+        
+>>>>>>> 18f7a8a38057862b943f00f22fd01ab2a6a90091
