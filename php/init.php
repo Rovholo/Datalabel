@@ -1,5 +1,5 @@
 <?php
-namespace Rovholo/datalabel;
+namespace Rovholo\datalabel;
 class init{
   public function world(){
     return 'world';
