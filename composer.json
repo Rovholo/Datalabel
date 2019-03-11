@@ -4,5 +4,8 @@
             "Rovholo\\datalabel\\": "php/",
             "Rovholo\\datalabel\\Tests\\": "tests/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
     }
 }
