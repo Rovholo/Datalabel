@@ -6,7 +6,7 @@ class initTest extends \PHPUnit_Framework_TestCase{
   protected $hello;
   
   public function setUp(){//this part of the code initiates the hello variable
-    $this->hello = new \Rovholo\datalabel\php\init();
+    $this->hello = new \Rovholo\datalabel\init();
   }
   /**
    * @covers ::world
