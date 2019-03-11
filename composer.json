@@ -1,8 +1,8 @@
 {
     "autoload": {
         "psr-4": {
-            "Rhovholo\\datalabel\\": "src/",
-            "Rhovholo\\datalabel\\Tests\\": "tests/"
+            "Rovholo\\datalabel\\": "php/",
+            "Rovholo\\datalabel\\Tests\\": "tests/"
         }
     }
 }
