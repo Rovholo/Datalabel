@@ -2,7 +2,7 @@
 /**
  * @coversDefaultClass \Rovholo\datalabel\init
  */
-class initTest extends PHPUnit_Framework_TestCase{
+class initTest2 extends PHPUnit_Framework_TestCase{
   protected $myname;
 
   public function setUp(){//this part of the code initiates the hello variable
