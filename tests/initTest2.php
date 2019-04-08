@@ -11,7 +11,7 @@ class initTest extends PHPUnit_Framework_TestCase{
   /**
    * @covers ::world
    */
-  public function testinit(){//this part of the code checks if the value returned by the world() method is equal to word
+  public function testinit2(){//this part of the code checks if the value returned by the world() method is equal to word
     $this->assertSame('name',$this->myname->name());
   }
 }
