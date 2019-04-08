@@ -10,6 +10,12 @@ matrix:
   - php composer.phar install --dev --no-interaction
   services:
     - mysql
+    addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
   before_script:
     - travis_retry composer self-update
     - composer install
