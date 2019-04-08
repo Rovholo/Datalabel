@@ -1,7 +1,7 @@
 <?php
 namespace Rovholo\datalabel;
 class init2{
-  public function connectDB(){
+  function connectDB(){
     $servername = "localhost";
     $username = "piykvshj";
     $password = "Differ123*cpanel";
