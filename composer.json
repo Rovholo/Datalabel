@@ -4,5 +4,9 @@
             "Rovholo\\datalabel\\": "php/",
             "Rovholo\\datalabel\\Tests\\": "tests/"
         }
-
+    },
+    "require-dev": {
+        "php-coveralls/php-coveralls": "^2.1",
+        "phpunit/phpcov": "^2.0"
+    }
 }
