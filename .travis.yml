@@ -11,11 +11,10 @@ matrix:
   services:
     - mysql
   addons:
-      apt:
-        sources:
-          - mysql-5.7-trusty
-        packages:
-          - mysql-server
+    packages:
+       - mysql-server-5.6
+       - mysql-client-core-5.6
+       - mysql-client-5.6
   before_script:
     - travis_retry composer self-update
     - composer install
