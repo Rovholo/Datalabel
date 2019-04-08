@@ -24,7 +24,7 @@ matrix:
     - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
     - php coveralls.phar --verbose
   after_success:
-    - codecov
+    - bash <(curl -s https://codecov.io/bash
     - travis_retry php vendor/bin/php-coveralls
     # or enable logging
     - travis_retry php vendor/bin/php-coveralls -v
