@@ -1,6 +1,6 @@
 <?php
 namespace Rovholo\datalabel;
-class init{
+class init2{
   public function name(){
     return 'name';
   }
