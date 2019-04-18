@@ -9,10 +9,10 @@ class initTest extends PHPUnit_Framework_TestCase{
     $this->hello = new \Rovholo\datalabel\init();
   }
   /**
-   * @covers ::init
+   * @covers ::world
    */
   public function testinit(){//this part of the code checks if the value returned by the world() method is equal to word
-    $this->assertSame('init',$this->hello->world());
+    $this->assertSame('world',$this->hello->world());
   }
 }
 ?>
