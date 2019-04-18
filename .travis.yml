@@ -1,4 +1,3 @@
-Bytes
   matrix:
     include:
     - language: php
