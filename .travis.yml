@@ -19,7 +19,7 @@ matrix:
   script:
     - mkdir -p build/logs
     - php vendor/bin/phpunit -c phpunit.xml.dist
-    - phpunit --testsuite=unit --coverage-clover coverage.xml
+    - "phpunit --testsuite=unit --coverage-clover coverage.xml"
   after_script:
     - wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
     - php coveralls.phar --verbose
