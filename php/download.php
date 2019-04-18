@@ -6,7 +6,7 @@
             $username = "piykvshj";
             $password = "Differ123*cpanel";
             
-            $link = new mysqli($servername,$username,$password,"piykvshj_database1");
+            $link = mysqli_connect($servername,$username,$password,"piykvshj_database1");
             
             if ($link->connect_error) {
                 die("connection failed: " . $link->connect_error);
