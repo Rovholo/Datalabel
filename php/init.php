@@ -1,6 +1,6 @@
 <?php
 namespace Rovholo\datalabel;
-class connect{
+class init{
   public function world(){
     return 'world';
   }
