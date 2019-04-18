@@ -2,7 +2,7 @@
 namespace Rovholo\datalabel;
 class init{
   public function world(){
-    return 'init';
+    return 'world';
   }
 }
 ?>
