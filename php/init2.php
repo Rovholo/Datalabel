@@ -14,8 +14,8 @@ class init2{
         die("Connection failed: " . $conn->connect_error);
     }
     return "Connected successfully";*/
-  return 'name';
-  }
+    return 'name';
+    }
    
-}
+  }
 ?>
