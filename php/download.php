@@ -2,7 +2,7 @@
     namespace Rovholo\datalabel;
     class download{
         function request() {
-            $servername = "localhost";
+            $servername = "smasol.co.za";
             $username = "piykvshj";
             $password = "Differ123*cpanel";
             
