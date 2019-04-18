@@ -1,6 +1,6 @@
 <?php
     namespace Rovholo\datalabel;
-    class init2{
+    class connect{
         function connectDetail() {
             $username = "piykvshj";
             $password = "Differ123*cpanel";
