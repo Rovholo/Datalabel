@@ -9,7 +9,7 @@ class downloadTest extends PHPUnit_Framework_TestCase{
     $this->result = new \Rovholo\datalabel\download();
   }
   /**
-   * @covers ::query
+   * @covers ::request
    */
   public function testinit(){//this part of the code checks if the value returned by the world() method is equal to word
     $this->assertFalse($this->result->request());
