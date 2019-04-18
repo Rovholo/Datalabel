@@ -1,12 +1,12 @@
 <?php
 /**
- * @coversDefaultClass \Rovholo\datalabel\init2
+ * @coversDefaultClass \Rovholo\datalabel\connect
  */
-class init2Test extends PHPUnit_Framework_TestCase{
+class connectTest extends PHPUnit_Framework_TestCase{
   protected $connect;
 
   public function setUp(){//this part of the code initiates the hello variable
-    $this->connect = new \Rovholo\datalabel\init2();
+    $this->connect = new \Rovholo\datalabel\connect();
   }
   /*
    * @covers ::connectDetail
