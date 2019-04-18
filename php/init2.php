@@ -1,21 +1,15 @@
 <?php
-namespace Rovholo\datalabel;
-class init2{
-  function connectDB(){
-    /*$servername = "localhost";
-    $username = "piykvshj";
-    $password = "Differ123*cpanel";
-
-  // Create connection
-    $conn = new mysqli_connect($servername, $username, $password,"piykvshj_database1");
-
-  // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    namespace Rovholo\datalabel;
+    class init2{
+        function connectDetail() {
+            $username = "piykvshj";
+            $password = "Differ123*cpanel";
+            $database = "piykvshj_database1";
+            $link = mysqli_connect("127.0.0.1", $username ,$password , $database);
+            return $link;
+        }
+        function closeConnection(){
+            mysqli_close($this->connectDetail());
+        }
     }
-    return "Connected successfully";*/
-    return 'name';
-    }
-   
-  }
 ?>
