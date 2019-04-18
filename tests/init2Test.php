@@ -12,7 +12,7 @@ class init2Test extends PHPUnit_Framework_TestCase{
    * @covers ::connectDetail
    */
   public function testConnectDetail(){
-     $this->assertNotNull($this->result->connectDetail());
+     $this->assertNotNull($this->connect->connectDetail());
   }
 }
 ?>
