@@ -1,7 +1,7 @@
 <?php
     namespace Rovholo\datalabel;
     class download{
-        function query() {
+        function request() {
             $servername = "localhost";
             $username = "piykvshj";
             $password = "Differ123*cpanel";
