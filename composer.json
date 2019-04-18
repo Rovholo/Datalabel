@@ -4,9 +4,5 @@
             "Rovholo\\trial\\": "php/",
             "Rovholo\\trial\\Tests\\": "tests/"
         }
-    },
-    "require-dev": {
-        "phpunit/phpunit": "3.7.*",
-        "php-coveralls/php-coveralls":"2.1"
     }
 }
