@@ -15,7 +15,7 @@ class downloadTest extends PHPUnit_Framework_TestCase{
     $link = mysqli_connect("localhost","user","password","database1");
     mysqli_query($link,"CREATE TABLE images2 (img_id int,img_name varchar(255),img_data varchar(255));");
     
-    $this->assertFalse($this->result->request());
+    $this->assertTrue($this->result->request());
   }
 }
 ?>
