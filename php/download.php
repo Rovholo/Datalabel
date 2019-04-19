@@ -2,11 +2,11 @@
     namespace Rovholo\datalabel;
     class download{
         function request() {
-            $servername = "smasol.co.za";
-            $username = "piykvshj";
-            $password = "Differ123*cpanel";
+            $servername = "localhost";
+            $username = "user";
+            $password = "password";
             
-            $link = mysqli_connect($servername,$username,$password,"piykvshj_database1");
+            $link = mysqli_connect($servername,$username,$password,"database1");
             
             if ($link->connect_error) {
                 die("connection failed: " . $link->connect_error);
