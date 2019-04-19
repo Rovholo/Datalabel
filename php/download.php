@@ -2,18 +2,13 @@
     namespace Rovholo\datalabel;
     class download{
         function request() {
-            $servername = "localhost";
             $username = "user";
             $password = "password";
-            
-            $link = mysqli_connect($servername,$username,$password,"database1");
-            
+            $link = mysqli_connect("localhost",$username,$password,"database1");
             if ($link->connect_error) {
                 die("connection failed: " . $link->connect_error);
             }
-            
             $result = mysqli_query($link,"SELECT * FROM images2");
-            
             $link->close();
             
             $arr = array();
