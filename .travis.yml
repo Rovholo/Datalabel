@@ -6,9 +6,9 @@ services:
 before_script:
   - travis_retry composer self-update
   - composer install
-  - mysql -u root -e "CREATE DATABASE piykvshj_database1;"
-  - mysql -u root -e "CREATE user 'piykvshj'@'localhost' IDENTIFIED BY 'Differ123*cpanel';"
-  - mysql -u root -e "GRANT ALL ON piykvshj_database1.* TO 'piykvshj'@'localhost';"
+  - mysql -u root -e "CREATE DATABASE database1;"
+  - mysql -u root -e "CREATE user 'user'@'localhost' IDENTIFIED BY 'password';"
+  - mysql -u root -e "GRANT ALL ON database1.* TO 'user'@'localhost';"
 script:
   - "phpunit --testsuite=unit --coverage-clover coverage.xml"
 after_script:
