@@ -22,7 +22,7 @@
             }
             echo json_encode($arr);
             
-            return $result;
+            return true;
         }
     }
 ?>
