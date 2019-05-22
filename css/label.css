@@ -1,0 +1,20 @@
+img {
+    position: absolute;
+    width: 800px;
+    height: 500px;
+    z-index: -1;
+}
+
+.questions {
+    position: absolute;
+    background: grey;
+    width:220px;
+    height:500px;
+    display: inline-block;
+    outline: 2px grey solid;
+}
+
+ul {
+    list-style: none;
+}
+
