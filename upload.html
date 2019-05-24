@@ -2,6 +2,15 @@
 <html lang="en">
 <head>
 	<style>
+		.container {
+    	position: center-right;
+    	margin-left: auto;
+    	margin-right: auto;
+    	max-width: 300px;
+    	padding: 16px;
+    	background-color: white;
+    	text-align: center;
+	}
 		body  {
   		background-image: url("sil.jpg");
   		background-color: #cccccc;
@@ -16,11 +25,13 @@
 </head>
 		
 <body>
+	<div class = "container">
             <script src="index.js"></script>
             <input type="file" name="fileupload" id="fileupload" multiple>
             <button type="button" class = "signupbtn" onclick='upload()'>Display</button><br/>
             <div id="demo1"></div>
             
             <div><a href="/download.html">view pics</a></div>
+	</div>
 </body>
 </html>
