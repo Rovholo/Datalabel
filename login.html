@@ -1,34 +1,27 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Page</title>
-    <link rel="stylesheet" type="text/css" href="login.css">
+    <title>Log In Page</title>
+    <link rel="stylesheet" href="login.css">
   </head>
-  <body>
-    <form>
-      <input checked id='signin' name='action' type='radio' value='signin'>
-      <label for='signin'>Sign in</label>
-      <input id='signup' name='action' type='radio' value='signup'>
-      <label for='signup'>Sign up</label>
-      <input id='reset' name='action' type='radio' value='reset'>
-      <label for='reset'>Reset</label>
-      <div id='wrapper'>
-        <div id='arrow'></div>
-        <input id='email' placeholder='Email' type='text'>
-        <input id='pass' placeholder='Password' type='password'>
-        <input id='repass' placeholder='Repeat password' type='password'>
-      </div>
-      <button type='submit'>
-        <span>
-          Reset password
-          <br>
-          Sign in
-          <br>
-          Sign up
-        </span>
-      </button>
-    </form>
 
+  <body>
+    <div class="login-box">
+      <h1>Login</h1>
+
+      <div class="textbox">
+        <i class="fas fa-user"></i>
+        <input type="text" placeholder="Username">
+      </div>
+
+      <div class="textbox">
+        <i class="fas fa-lock"></i>
+        <input type="password" placeholder="Password">
+      </div>
+
+      <input id="signin" type="submit" class="btn" onclick="sign_in" value="Sign in">
+      <input id="signup" type="button" class="btn" onclick="sign_up" value="Sign Up">
+    </div>
   </body>
 </html>

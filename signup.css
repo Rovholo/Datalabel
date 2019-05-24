@@ -4,10 +4,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url(login_bg.jpg) no-repeat;
+  background: url(signup_bg.jpg) no-repeat;
   background-size: cover;
 }
-.login-box {
+.wrap {
   width: 280px;
   position: absolute;
   top: 50%;
@@ -15,7 +15,7 @@ body {
   transform: translate(-50%, -50%);
   color: white;
 }
-.login-box h1 {
+.wrap h2 {
   float: left;
   font-size: 40px;
   border-bottom: 5px solid #4caf50;
@@ -23,11 +23,7 @@ body {
   padding: 13px 0;
 }
 
-.login-box input[type = button]:hover{
-  background: #4caf50;
-}
-
-.login-box input[type = submit]:hover{
+.wrap input[type = button]:hover{
   background: #4caf50;
 }
 .textbox{
@@ -45,6 +41,7 @@ body {
 }
 .textbox input{
   border: none;
+  border-radius: 8px;
   outline: none;
   background: none;
   color: white;
