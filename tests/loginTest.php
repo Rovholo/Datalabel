@@ -14,12 +14,12 @@ class loginTest extends PHPUnit_Framework_TestCase{
   public function testinit(){//this part of the code checks if the value returned by the world() method is equal to word
     $result = $this->result->login("user");
     $password = "name";
-    $this->assertTrue(json_decode($result)[0]->password == $password);
+    $this->assertTrue(json_decode($result) != "error" || json_decode($result)[0]->password == $password);
   }
   
   public function testinit2(){//this part of the code checks if the value returned by the world() method is equal to word
     $result = $this->result->login("");
-    $this->assertTrue( count(json_decode($result)) == 0 || json_decode($result) == "error");
+    $this->assertTrue(json_decode($result) == "error" || count(json_decode($result)) == 0);
   }
 }
 ?>
