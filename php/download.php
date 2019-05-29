@@ -1,7 +1,7 @@
 <?php
     namespace Rovholo\datalabel;
     class download{
-        function request() {
+        function request($username,$password) {
             $username = "user";
             $password = "password";
             $link = mysqli_connect("localhost",$username,$password,"database1");
