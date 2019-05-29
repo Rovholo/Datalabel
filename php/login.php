@@ -2,7 +2,7 @@
     namespace Rovholo\datalabel;
     class login{
         function login($username) {
-            $link = mysqli_connect("localhost","piykvshj","Differ123*cpanel","piykvshj_database1");
+            $link = mysqli_connect("localhost","user","password","database1");
             if ($link->connect_error) {
                 die("connection failed: " . $link->connect_error);
             }
