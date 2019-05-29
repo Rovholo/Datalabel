@@ -10,6 +10,10 @@
             $result = mysqli_query($link,"SELECT * FROM users where user_name='$username'");
             $link->close();
             $arr = array();
+            if(is_bool($result) {
+                array_push($arr, "error");
+                return json_encode($arr);
+            }
             while ($row = mysqli_fetch_assoc($result)) 
             {
                 array_push($arr, $row);
