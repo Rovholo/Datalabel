@@ -29,65 +29,55 @@
         //document.getElementById('doc').innerHTML = this.responseText;
         q = document.getElementById('questions');
         //document.getElementById('doc').innerHTML = q.nodeName;
-        labels = new Array(res.length)
-        qindex = 0;
-        b = document.createElement("input");
-        b.type = "button";
-        b.value = "back";
-        b.onclick = function(){prev_label()};
-        //document.getElementById('doc').innerHTML = b.nodeName
-        q.append(b);
-        b1 = document.createElement("input");
-        b1.type = "button";
-        b1.value = "next";
-        b1.onclick = function(){next_label()};
-        q.append(b1);
+        labels = new Array(res.length);
+        //qindex = 0;
+        rect = new Array(res.length).fill(0);
         
+        setlabels();
         
-        b2 = document.createElement("input");
-        b2.type = "button";
-        b2.value = "save";
-        b2.onclick = function(){savelabels()};
-        b2.style.display = "none";
-        q.append(b2);
-        //for(var i = 0; i < res.length; i++) {
-                setlabel(0);
-            
-        //}
     };
     httpReq.send("");
-    
+    userinfo = JSON.parse(document.cookie);
+    //alert(userinfo[0].user_id);
     init();
     //alert("canvas");
- }
- function next_label() {
-    if(qindex < res.length-1){
-        qindex = qindex + 1;
-    }
-    else{
-        qindex = 0;
-    }
-    init2();
-    clearlabels();
-    setlabel(qindex);
-    
- }
- function prev_label() {
-     if(qindex === 0){
-        qindex = res.length - 1;
-    }
-    else{
-        qindex = qindex - 1;
-    }
-    init2();
-    clearlabels();
-    setlabel(qindex);
-    
+    show_progress();
  }
  
+ function randcolor() {
+    var r = Math.floor(256 * Math.random());
+    var g = Math.floor(256 * Math.random());
+    var b = Math.floor(256 * Math.random());
+    return "rgb(" + r + "," + g + "," + b + ")";
+}
  
+ function show_progress() {
+    //alert("progress");
+    var formData = new FormData();
+   // alert(userinfo);
+    formData.set('userID', userinfo.user_id);
+    var httpReq = new XMLHttpRequest();
+    httpReq.open("POST", "php/view.php", false);
+    httpReq.onload = function() {
+        //alert("progress3");
+        var labeled = JSON.parse(this.responseText);
+        var progress = (labeled.length/resarr.length)*100;
+        var p = document.getElementById('progress');
+        p.style.color = "darkorange";
+        if(progress == 100){
+            p.innerHTML = "progress: completed";
+        }
+        else {
+            p.innerHTML = "progress: " + progress + "%";
+        }
+        //alert("progress4");
+    };
+    httpReq.send(formData);
+    //alert("progress2");
+ }
+
  function clearlabels() {
-    while (q.lastChild && q.lastChild.type != "button") {
+    while (q.lastChild) {
         q.removeChild(q.lastChild);
     }
 }
@@ -96,6 +86,8 @@ function savelabels() {
     //alert("save");
     var httpReq = new XMLHttpRequest();
     var formData = new FormData();
+    formData.set('userID', userinfo.user_id);
+    formData.set('imgID', resarr[index].img_id);
     formData.set('fileName', resarr[index].img_name);
     formData.set('fileType', resarr[index].img_type);
     formData.set('dataUrl', resarr[index].img_data);
@@ -111,125 +103,162 @@ function savelabels() {
     };
         
     httpReq.send(formData);
-    b.style.display = "inline-block";
-    b1.style.display = "inline-block";
-    b2.style.display = "none";
+    //alert("save");
+    show_progress();
+    //alert("save");
     next();
+    //alert("save");
     
 }
 
-function setText(v) {
-    //alert("label[qindex]");
-    //if(labels[qindex]) {
+function setText(l,v) {
+    labels[qindex] = [{label:l, value:v},{x:rect[qindex].startX, y:rect[qindex].startY, w:rect[qindex].w,h:rect[qindex].h}];
     //alert(labels[qindex]);
-    //}
-    labels[qindex] = [v,{x:rect.startX, y:rect.startY, w:rect.w,h:rect.h}];
     //alert(v);
     var save = true;
-    for(var i = 0; i < labels.length;i++){
-        if(!labels[i]) {
+    for(var i = 0; i < labels.length;i++) {
+        if(!labels[i] || rect[i].w === undefined) {
             save = false;
             break;
         }
+        if(labels[i] && labels[i][1].w ===undefined) {
+            labels[i] = [labels[i][0],{x:rect[i].startX, y:rect[i].startY, w:rect[i].w,h:rect[i].h}]
+        }
     }
-    if(save) {
-        b.style.display = "none";
-        b1.style.display = "none";
-        b2.style.display = "inline-block";
+    
+    if(save && q.lastChild.type != "button") {
+        var b2 = document.createElement("input");
+        b2.type = "button";
+        b2.value = "save";
+        b2.onclick = function(){savelabels()};
+        q.append(b2);
     }
     //document.getElementById('doc').innerHTML = v;
 }
+
+function labelling(i,e) {
+    qindex = i;
+    //canvas.addEventListener('mousedown', mouseDown, false);
+    //canvas.addEventListener('mouseup', mouseUp, false);
+    //canvas.addEventListener('mousemove', mouseMove, false);
+    //alert("it woorks");
+    //alert(i);
+    //e.style.color = "#ff0000";
+    //var children = tableFields.children;
+    for (var j = 0; j < q.children.length; j++) {
+        q.children[j].style.color = "#000000";
+    }
+    e.style.color = "#00CC50";
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    
+    try {
+        draw();
+    } catch (e) {
+        //do nothing
+    }
+    
+}
+ 
+ function setlabels() {
+    //alert("setlabel");
+    for(var i = 0; i < res.length; i++) {
+        setlabel(i)
+    }
+     
+ }
  
  function setlabel(i) {
-     //alert("setlabel");
-     var type = res[i].label_type;
-            var e = document.createElement("a");
-            e.setAttribute("align", "left");
-            e.innerHTML = "<br />" + res[i].label_name + "<br />";
-            q.appendChild(e);
-            if(type === 'textarea') {
-                e = document.createElement(type);
-                e.oninput = function(){setText(this.value)};
-                e.maxLength = "100";
-                e.cols = "25";
-                e.rows = "2";
-                q.appendChild(e);
-                e = document.createElement("br");
-                q.appendChild(e);
-                e = document.createElement("br");
-                q.appendChild(e);
-            }
-            else {
-                e = document.createElement("input");
-                e.setAttribute("type",type);
-                e.setAttribute("name","option");
-                e.oninput = function(){setText(res[qindex].point1)};
-                q.appendChild(e);
-                e = document.createElement("a");
-                e.innerHTML = res[i].point1 + "<br />";
-                q.appendChild(e);
+    var type = res[i].label_type;
+    var e = document.createElement("a");
+    e.setAttribute("align", "left");
+    e.onclick = function(){labelling(i,e)};
+    e.style.cursor = "pointer";
+    e.innerHTML = "<br />" + res[i].label_name + "<br />";
+    q.appendChild(e);
+    if(type === 'textarea') {
+        e1 = document.createElement(type);
+        e1.oninput = function(){setText(res[i].label_name, this.value)};
+        e1.maxLength = "100";
+        e1.cols = "25";
+        e1.rows = "2";
+        q.appendChild(e1);
+        e1 = document.createElement("br");
+        q.appendChild(e1);
+        e1 = document.createElement("br");
+        q.appendChild(e1);
+    }
+    else {
+        e1 = document.createElement("input");
+        e1.setAttribute("type",type);
+        e1.setAttribute("name","option");
+        e1.oninput = function(){setText(res[i].label_name, res[i].point1)};
+        q.appendChild(e1);
+        e1 = document.createElement("a");
+        e1.innerHTML = res[i].point1 + "<br />";
+        q.appendChild(e1);
                 
-                e = document.createElement("input");
-                e.setAttribute("type",type);
-                e.setAttribute("name","option");
-                e.oninput = function(){setText(res[qindex].point2)};
-                q.appendChild(e);
-                e = document.createElement("a");
-                e.innerHTML = res[i].point2 + "<br />";
-                q.appendChild(e);
+        e1 = document.createElement("input");
+        e1.setAttribute("type",type);
+        e1.setAttribute("name","option");
+        e1.oninput = function(){setText(res[i].label_name, res[i].point2)};
+        q.appendChild(e1);
+        e1 = document.createElement("a");
+        e1.innerHTML = res[i].point2 + "<br />";
+        q.appendChild(e1);
                 
-                e = document.createElement("input");
-                e.setAttribute("type",type);
-                e.setAttribute("name","option");
-                e.oninput = function(){setText(res[qindex].point3)};
-                q.appendChild(e);
-                e = document.createElement("a");
-                e.innerHTML = res[i].point3 + "<br />";
-                q.appendChild(e);
+        e1 = document.createElement("input");
+        e1.setAttribute("type",type);
+        e1.setAttribute("name","option");
+        e1.oninput = function(){setText(res[i].label_name, res[i].point3)};
+        q.appendChild(e1);
+        e1 = document.createElement("a");
+        e1.innerHTML = res[i].point3 + "<br />";
+        q.appendChild(e1);
                 
-                e = document.createElement("input");
-                e.setAttribute("type",type);
-                e.setAttribute("name","option");
-                e.oninput = function(){setText(res[qindex].point4)};
-                q.appendChild(e);
-                e = document.createElement("a");
-                e.innerHTML = res[i].point4 + "<br />";
-                q.appendChild(e);
+        e1 = document.createElement("input");
+        e1.setAttribute("type",type);
+        e1.setAttribute("name","option");
+        e1.oninput = function(){setText(res[i].label_name, res[i].point4)};
+        q.appendChild(e1);
+        e1 = document.createElement("a");
+        e1.innerHTML = res[i].point4 + "<br />";
+        q.appendChild(e1);
                 
-                e = document.createElement("input");
-                e.setAttribute("type",type);
-                e.setAttribute("name","option");
-                e.oninput = function(){setText(res[qindex].point5)};
-                q.appendChild(e);
-                e = document.createElement("a");
-                e.innerHTML = res[i].point5 + "<br /><br />";
-                q.appendChild(e);
-            }
+        e1 = document.createElement("input");
+        e1.setAttribute("type",type);
+        e1.setAttribute("name","option");
+        e1.oninput = function(){setText(res[i].label_name, res[i].point5)};
+        q.appendChild(e1);
+        e1 = document.createElement("a");
+        e1.innerHTML = res[i].point5 + "<br /><br />";
+        q.appendChild(e1);
+    }
  }
  
  function init() {
     //alert("init");
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
-    rect = {};
-    drag = false;
-    closeEnough = 10;
+    //rect = [];
+    //closeEnough = 5;
     dragTL=dragBL=dragTR=dragBR=false;
     canvas.addEventListener('mousedown', mouseDown, false);
     canvas.addEventListener('mouseup', mouseUp, false);
     canvas.addEventListener('mousemove', mouseMove, false);
     //canvas.addEventListener('mouseover', mouseover, false);
     //alert("init");
-    
+    colors = ["#FF0000","#00FF00","#0000FF","#FFFF00","00FF00","00FFFF","#FFD700","#191970","#8B4513","#FFA500"];
     
 }
 
 function init2() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    rect = {};
-    drag = false;
-    closeEnough = 10;
+    labels = new Array(res.length);
+    rect = new Array(res.length).fill(0);
+    //drag = false;
+    //closeEnough = 5;
     dragTL=dragBL=dragTR=dragBR=false;
+    qindex = undefined;
     //canvas.addEventListener('mousedown', mouseDown, false);
     //canvas.addEventListener('mouseup', mouseUp, false);
     //canvas.addEventListener('mousemove', mouseMove, false);
@@ -249,10 +278,8 @@ function init2() {
     }
     image.src = resarr[index].img_data;
     init2();
-    qindex = 0;
-    labels = new Array(res.length);
     clearlabels();
-    setlabel(qindex);
+    setlabels();
     
  }
  
@@ -267,93 +294,111 @@ function init2() {
     }
     image.src = resarr[index].img_data;
     init2();
-    qindex = 0;
-    labels = new Array(res.length);
     clearlabels();
-    setlabel(qindex);
+    setlabels();
     
  }
  
 function mouseDown(e) {
     mouseX = e.pageX - this.offsetLeft;
     mouseY = e.pageY - this.offsetTop;
-    //doc = document.getElementById("doc");
+    //doc = document.getElementById("doc").innerHTML = rect[qindex].w;
     // if there isn't a rect yet
-    //alert("mousedown");
-    if(rect.w === undefined){
-        rect.startX = mouseY;
-        rect.startY = mouseX;
-        document.getElementById("doc").innerHTML = rect.startX + " " + rect.startY;
+    //alert("mousedown " + qindex);
+    //var de = document.createElement("a");
+    //de.innerHTML ="qindex "+qindex+" " +rect[0].startX + " " + rect[0].startY +" " + rect[1].startX + " " + rect[1].startY +" " + rect[2].startX + " " + rect[2].startY +"<br />";
+    //document.getElementById("doc1").appendChild(de);
+    
+    if(rect[qindex].w === undefined){
+        rect[qindex] = { startX:mouseX, startY:mouseY, w:0, h:0 };
+        //alert(rect[qindex);
+        //rect[qindex].startX = mouseX;
+        //rect[qindex].startY = mouseY;
+        //rect[qindex].w = rect[qindex].h = 0;
+        //var de = document.createElement("a");
+        //de.innerHTML = rect[qindex].startX + " " + rect[qindex].startY;
+        //document.getElementById("doc1").appendChild(de);
         dragBR = true;
+        //return;
     }
+    
     // 1. top left
-    if( checkCloseEnough(mouseX, rect.startX) && checkCloseEnough(mouseY, rect.startY) ){
+    else if( closeEnough(mouseX, rect[qindex].startX,mouseY, rect[qindex].startY) ) {
         //doc.innerHTML = "inelse1"; 
-        canvas.style.cursor = "nwse-resize";
+        //canvas.style.cursor = "nwse-resize";
         dragTL = true;
     }
     // 2. top right
-    else if( checkCloseEnough(mouseX, rect.startX+rect.w) && checkCloseEnough(mouseY, rect.startY) ){
+    else if( closeEnough(mouseX, rect[qindex].startX+rect[qindex].w,mouseY, rect[qindex].startY) ) {
         //doc.innerHTML = "inelse2"; 
-  	    canvas.style.cursor = "nesw-resize";
+  	    //canvas.style.cursor = "nesw-resize";
         dragTR = true;
     }
     // 3. bottom left
-    else if( checkCloseEnough(mouseX, rect.startX) && checkCloseEnough(mouseY, rect.startY+rect.h) ){
+    else if( closeEnough(mouseX, rect[qindex].startX,mouseY, rect[qindex].startY+rect[qindex].h) ){
         //doc.innerHTML = "inelse3";
-        canvas.style.cursor = "nesw-resize";
+        //canvas.style.cursor = "nesw-resize";
         dragBL = true;
     }
     // 4. bottom right
-    else if( checkCloseEnough(mouseX, rect.startX+rect.w) && checkCloseEnough(mouseY, rect.startY+rect.h) ){
+    else if( closeEnough(mouseX, rect[qindex].startX+rect[qindex].w,mouseY, rect[qindex].startY+rect[qindex].h) ){
         //doc.innerHTML = "inelse4";
-        canvas.style.cursor = "nwse-resize";
+        //canvas.style.cursor = "nwse-resize";
         dragBR = true;
     }
     else {
         // handle not resizing
         //doc.innerHTML = "not resizing";
     }
-    document.getElementById("doc").innerHTML = rect.startX + " " + rect.startY;
+    //document.getElementById("doc").innerHTML = rect[qindex].startX + " " + rect[qindex].startY;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     draw();
-    
-    //ctx.strokeRect(10, 10, 50, 50);
 
 }
 
 function checkCloseEnough(p1, p2){
-  return Math.abs(p1-p2) < closeEnough;
+  return Math.abs(p1-p2) < 10;
+}
+
+function closeEnough(p1,p2,p3,p4) {
+    return Math.abs(p1-p2) < 8 && Math.abs(p3-p4) < 8;
 }
 
 function mouseover(e) {
     //doc.innerHTML = "mouse over";
+    //document.getElementById("doc").innerHTML = mouseX+","+mouseY+" - "+rect[qindex.startX + "," + rect[qindex.startY +" - "+ rect[qindex.w +","+ rect[qindex.h;
     canvas.style.cursor = "move";
     
 }
 
 function mouseMove(e) {
+    //alert("something");
+    //alert(mouseX+","+mouseY+" - "+rect[qindex.startX + "," + rect[qindex.startY +" - "+ rect[qindex.w +","+ rect[qindex.h);
+  //document.getElementById("doc").innerHTML = mouseX+","+mouseY+" - "+rect[qindex.startX + "," + rect[qindex.startY +" - "+ rect[qindex.w +","+ rect[qindex.h;
   mouseX = e.pageX - this.offsetLeft;
   mouseY = e.pageY - this.offsetTop;
+  
   if(dragTL){
-    rect.w += rect.startX-mouseX;
-    rect.h += rect.startY-mouseY;
-    rect.startX = mouseX;
-    rect.startY = mouseY;
+    rect[qindex].w -= mouseX - rect[qindex].startX;
+    rect[qindex].h -= mouseY - rect[qindex].startY;
+    rect[qindex].startX = mouseX;
+    rect[qindex].startY = mouseY;
   } else if(dragTR) {
-    rect.w += rect.startX-mouseX;
-    rect.h += rect.startY-mouseY;
-    rect.startY = mouseY;
+    rect[qindex].w = mouseX - rect[qindex].startX;
+    rect[qindex].h -= mouseY - rect[qindex].startY;
+    rect[qindex].startY = mouseY;
   } else if(dragBL) {
-    rect.w += rect.startX-mouseX;
-    rect.h += rect.startY-mouseY;
-    rect.startX = mouseX;  
+    rect[qindex].w -= mouseX - rect[qindex].startX;
+    rect[qindex].h = mouseY - rect[qindex].startY;
+    rect[qindex].startX = mouseX;  
   } else if(dragBR) {
-    rect.w += rect.startX-mouseX;
-    rect.h += rect.startY-mouseY;
+    rect[qindex].w = mouseX - rect[qindex].startX;
+    rect[qindex].h = mouseY - rect[qindex].startY;
   }
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    draw();
+  if( dragTL || dragTR ||  dragBL || dragBR ){
+     ctx.clearRect(0,0,canvas.width,canvas.height);
+     draw();
+  }
 }
 
 function mouseUp() {
@@ -362,5 +407,10 @@ function mouseUp() {
 }
 
 function draw() {
-  ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
+    if(qindex >= colors.length) {
+        colors[qindex] = randcolor();
+    }
+    ctx.strokeStyle = colors[qindex];
+    //document.getElementById("doc").innerHTML =qindex+" -> " + mouseX+","+mouseY+" - "+rect[qindex].startX + "," + rect[qindex].startY +" - "+ rect[qindex].w +","+ rect[qindex].h;
+    ctx.strokeRect(rect[qindex].startX, rect[qindex].startY, rect[qindex].w, rect[qindex].h);
 }

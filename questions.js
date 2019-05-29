@@ -1,6 +1,8 @@
 function upload() {
     var file = document.getElementById('fileupload');
-
+    //alert("something");
+    //alert(document.cookie);
+    //alert(document.cookie[0]);
     for(var i = 0; i < file.files.length; i++) {
         send(i);
     }
@@ -46,6 +48,10 @@ function TypeDisplay() {
 
 function add(){
     //alert("add!!!!!");
+    var e = document.createElement("a");
+    e.setAttribute("align", "left");
+    e.innerHTML = point.value + "<br />";
+    document.getElementById("space").appendChild(e);
     if(count < 4){
         count++;
         points.push(point.value);
@@ -63,6 +69,12 @@ function add(){
         closeForm();
         //alert("successfully added points!!!");
         //count = 0;
+    }
+}
+function clearChilder() {
+    var q = document.getElementById("space");
+    while (q.lastChild) {
+        q.removeChild(q.lastChild);
     }
 }
 
@@ -94,6 +106,7 @@ function submitContent() {
 function formDisplay() {
 	
 	points = [];
+	clearChilder();
 	if(text.checked){
 	    addlabel.style.display = "none";
 	    submit1.style.display = "block";

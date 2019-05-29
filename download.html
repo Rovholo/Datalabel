@@ -9,10 +9,10 @@
         <title>home</title>
     </head>
     <body onload="download()" >
-           
+        <div class="bg-img">
         <center>
         
-            <h2>View</h2>
+            <h2>Label</h2>
             <!--<ul class="noBullet">
                 <li>
                     <input type="text" class="inputFields" id="username" name="username" placeholder="Username" value="" required/>
@@ -27,9 +27,10 @@
                     <input type="submit" id="login-btn" name="login" alt="login" value="view" onclick='download()' >
             </li>
             </ul>-->
+            <div id="progress"></div>
             <div class="cover" id="cover">
                 <img class='img' id="img" src="" alt="img" />
-                <canvas id="canvas" width="800" height="500" style="outline: 2px grey solid;"></canvas>
+                <canvas id="canvas" width="800" height="500" style="position:relative;outline: 2px dimgrey solid; z-index: 1;">Your browser does not support content</canvas>
                 <div class="questions" id="questions" align="left"></div>
             </div>
             <button type="button" onclick="prev()">prev</button>
@@ -37,6 +38,8 @@
             <!--<img id="img" src="" style="width:100px">-->
             <!--<a href="/register.html">sign up</a>-->
             <div id="doc" ></div>
+            <div id="doc1" ></div>
         </center>
+        </div>
     </body>
 </html>
