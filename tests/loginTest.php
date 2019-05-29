@@ -9,7 +9,7 @@ class loginTest extends PHPUnit_Framework_TestCase{
     $this->result = new \Rovholo\datalabel\login();
   }
   /**
-   * @covers ::request
+   * @covers ::login
    */
   public function testinit(){//this part of the code checks if the value returned by the world() method is equal to word
     $result = $this->result->login("user");
