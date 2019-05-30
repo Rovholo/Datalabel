@@ -16,7 +16,7 @@
                 #array_push($arr, "0 results");
             #}
             #echo json_encode($arr);
-            return $result;
+            return !$result;
         }
     }
 
