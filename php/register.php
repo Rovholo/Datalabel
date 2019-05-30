@@ -10,7 +10,7 @@
                 return "invalid input";
             }
             if( !( strpos($email,"@") && strpos($email, ".") && count($email) > 10 ) ) {
-                return "invalid mail";
+                return "invalid email";
             }
     
             $result = mysqli_query( $link,"INSERT INTO users(user_name, user_email, password) VALUES('$username', '$email', '$pass')" );
