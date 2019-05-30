@@ -1,5 +1,5 @@
 <?php
-     namespace Rovholo\datalabel;
+    namespace Rovholo\datalabel;
     class register{
         function register($username,$email,$pass) {
             $link = mysqli_connect("localhost","user","password","database1");
@@ -13,7 +13,7 @@
                 return "invalid email";
             }
     
-            $result = mysqli_query( $link,"INSERT INTO users (user_name, user_email, password) VALUES ('$username', '$email', '$pass')" );
+            $result = mysqli_query( $link,"INSERT INTO users (user_id,user_name, user_email, password) VALUES ('1','$username', '$email', '$pass')" );
             $link->close();
             return $result;
         }
