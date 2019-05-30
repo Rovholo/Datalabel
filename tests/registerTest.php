@@ -14,11 +14,11 @@ class registerTest extends PHPUnit_Framework_TestCase{
    * @covers ::register
    */
   public function testinit(){
-    $this->assertEqual($this->result->register("","email","pass"),'invalid input');
-    $this->assertEqual($this->result->register("user","","pass"),'invalid input');
-    $this->assertEqual($this->result->register("user","email",""),'invalid input');
-    $this->assertEqual($this->result->register("","",""),'invalid input');
-    $this->assertEqual($this->result->register("user","email","pass"),'invalid email');
+    $this->assertEquals($this->result->register("","email","pass"),'invalid input');
+    $this->assertEquals($this->result->register("user","","pass"),'invalid input');
+    $this->assertEquals($this->result->register("user","email",""),'invalid input');
+    $this->assertEquals($this->result->register("","",""),'invalid input');
+    $this->assertEquals($this->result->register("user","email","pass"),'invalid email');
     $this->assertTrue($this->result->register("user","email@domain.com","pass"));
   }
 }
