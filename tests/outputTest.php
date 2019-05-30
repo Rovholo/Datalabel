@@ -14,7 +14,7 @@ class outputTest extends PHPUnit_Framework_TestCase{
    * @covers ::upload
    */
   public function testinit(){
-    $this->assertTrue($this->result->upload("","","","","",""));
+    $this->assertTrue($this->result->upload('input','input','input','input','input','input'));
   }
 }
 ?>
