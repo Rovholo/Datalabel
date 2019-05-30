@@ -1,8 +1,8 @@
 <?php
 /**
- * @coversDefaultClass \Rovholo\datalabel\login
+ * @coversDefaultClass \Rovholo\datalabel\rate
  */
-class loginTest extends PHPUnit_Framework_TestCase{
+class rateTest extends PHPUnit_Framework_TestCase{
   protected $result;
   
   public function setUp(){//this part of the code initiates the hello variable
@@ -12,7 +12,7 @@ class loginTest extends PHPUnit_Framework_TestCase{
     mysqli_query($link,"INSERT INTO users (user_id,user_name,password,user_rating) values('1','user','name','0')");
   }
   /**
-   * @covers ::login
+   * @covers ::rate
    */
   public function testinit(){//this part of the code checks if the value returned by the world() method is equal to word
     $this->assertTrue( $this->result->rate(5,1) );
