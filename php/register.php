@@ -9,7 +9,7 @@
             if($username == "" || $pass == "" || $email == "")  {
                 return "invalid input";
             }
-            if( !strpos($email,"@") && !strpos($email, ".") && count($email) < 10 ) ) {
+            if( !strpos($email,"@") && !strpos($email, ".") && count($email) < 10 ) {
                 return "invalid email";
             }
     
