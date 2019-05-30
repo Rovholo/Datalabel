@@ -1,6 +1,6 @@
 <?php
     namespace Rovholo\datalabel;
-    class response{
+    class responses{
         function response() {
             $link = mysqli_connect("localhost","user","password","database1");
             if ($link->connect_error) {
