@@ -13,7 +13,7 @@
                 return "invalid email";
             }
     
-            $result = mysqli_query( $link,"INSERT INTO users(user_name, user_email, password) VALUES('$username', '$email', '$pass')" );
+            $result = mysqli_query( $link,"INSERT INTO users (user_name, user_email, password) VALUES ('$username', '$email', '$pass')" );
             $link->close();
             return $result;
         }
