@@ -6,9 +6,9 @@ class outputTest extends PHPUnit_Framework_TestCase{
   protected $result;
   
   public function setUp(){//this part of the code initiates the hello variable
-    $this->result = new \Rovholo\datalabel\register();
+    $this->result = new \Rovholo\datalabel\upload();
     $link = mysqli_connect("localhost","user","password","database1");
-    mysqli_query($link,"CREATE TABLE users (user_id int NOT NULL,user_name varchar(255),password varchar(255))");
+    mysqli_query($link,"CREATE TABLE images2 (img_id int,img_name varchar(255),img_data varchar(255));");
   }
   /**
    * @covers ::upload
