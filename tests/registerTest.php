@@ -2,7 +2,7 @@
 /**
  * @coversDefaultClass \Rovholo\datalabel\register
  */
-class loginTest extends PHPUnit_Framework_TestCase{
+class registerTest extends PHPUnit_Framework_TestCase{
   protected $result;
   
   public function setUp(){//this part of the code initiates the hello variable
