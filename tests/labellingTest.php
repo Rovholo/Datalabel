@@ -1,7 +1,7 @@
 
 <?php
 /**
- * @coversDefaultClass \Rovholo\datalabel\labellong
+ * @coversDefaultClass \Rovholo\datalabel\labelling
  */
 class labellingTest extends PHPUnit_Framework_TestCase{
   protected $result;
