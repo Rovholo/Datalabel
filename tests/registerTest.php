@@ -19,7 +19,7 @@ class registerTest extends PHPUnit_Framework_TestCase{
     $this->assertEquals($this->result->register("user","email",""),'invalid input');
     $this->assertEquals($this->result->register("","",""),'invalid input');
     $this->assertEquals($this->result->register("user","email","pass"),'invalid email');
-    //$this->assertTrue($this->result->register("user","email@domain.com","pass"));
+    $this->assertTrue($this->result->register("user","email@domain.com","pass"));
   }
 }
 ?>
