@@ -8,7 +8,7 @@ class registerTest extends PHPUnit_Framework_TestCase{
   public function setUp(){//this part of the code initiates the hello variable
     $this->result = new \Rovholo\datalabel\register();
     $link = mysqli_connect("localhost","user","password","database1");
-    mysqli_query($link,"CREATE TABLE users (user_name varchar(255),user_email varchar(255),password varchar(255))");
+    mysqli_query($link,"CREATE TABLE users (user_id int,user_name varchar(255),user_email varchar(255),password varchar(255))");
   }
   /**
    * @covers ::register
