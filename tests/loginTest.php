@@ -15,14 +15,9 @@ class loginTest extends PHPUnit_Framework_TestCase{
    * @covers ::login
    */
   public function testinit(){//this part of the code checks if the value returned by the world() method is equal to word
-    $result = json_decode($this->result->login("user"),true);
     $password = "name";
-    $this->assertTrue($result[0]['password'] == $password);
-  }
-  
-  public function testinit2(){//this part of the code checks if the value returned by the world() method is equal to word
-    $result = $this->result->login("");
-    $this->assertTrue(count(json_decode($result)) == 0);
+    $this->assertTrue( json_decode( $this->result->login("user"),true )[0]['password'] == $password );
+    $this->assertTrue( count($json_decode( $this->result->login("")) == 0 );
   }
 }
 ?>
