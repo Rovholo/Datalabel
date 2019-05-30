@@ -13,14 +13,14 @@
             $result = mysqli_query($link,"UPDATE users SET user_rating = '$rate' WHERE users.user_id = '$user'");
     
             $link->close();
-            $arr = array();
-            while ($row = mysqli_fetch_assoc($result)) 
-            {
+            #$arr = array();
+            #while ($row = mysqli_fetch_assoc($result)) 
+            #{
                 #echo json_encode($result);
-                array_push($arr, $row);
-            }
-            echo json_encode($arr);
-            return json_encode($arr);
+                #array_push($arr, $row);
+            #}
+            echo $result;
+            return $result;
         }
     }
 
