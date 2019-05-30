@@ -1,4 +1,3 @@
-
 <?php
 /**
  * @coversDefaultClass \Rovholo\datalabel\labelling
