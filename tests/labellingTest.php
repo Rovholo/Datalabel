@@ -12,10 +12,10 @@ class labellingTest extends PHPUnit_Framework_TestCase{
     mysqli_query($link,"CREATE TABLE labels (label_id int,label_name varchar(255),label_data varchar(255));");
   }
   /**
-   * @covers ::label
+   * @covers ::labels
    */
   public function testinit(){
-    $this->assertTrue($this->result->label() != false);
+    $this->assertTrue($this->result->labels() != false);
   }
 }
 ?>
