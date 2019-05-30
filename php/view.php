@@ -19,7 +19,7 @@
                 #echo json_encode($result);
                 array_push($arr, $row);
             }
-            echo json_encode($arr);
+            return json_encode($arr);
         }
     }
 
