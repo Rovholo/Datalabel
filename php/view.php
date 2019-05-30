@@ -1,7 +1,7 @@
 <?php
     namespace Rovholo\datalabel;
     class view{
-        function download($username) {
+        function download($user) {
             $link = mysqli_connect("localhost","user","password","database1");
             if ($link->connect_error) {
                 die("connection failed: " . $link->connect_error);
