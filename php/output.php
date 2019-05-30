@@ -15,7 +15,7 @@
             }
             $link->close();
         
-            return result;
+            return $result;
         }
     }
 ?>
