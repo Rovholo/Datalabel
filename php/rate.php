@@ -20,7 +20,7 @@
                 #array_push($arr, $row);
             #}
             echo $result;
-            return !$result;
+            return $result;
         }
     }
 
