@@ -15,7 +15,7 @@ class responsesTest extends PHPUnit_Framework_TestCase{
    * @covers ::response
    */
   public function testinit(){//this part of the code checks if the value returned by the world() method is equal to word
-    $this->assertTrue( $this->result->response() );
+    $this->assertTrue( $this->result->response() != null);
   }
 }
 ?>
